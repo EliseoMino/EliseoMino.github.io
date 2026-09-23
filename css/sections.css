@@ -71,7 +71,7 @@
 .cv-preview__img {
   max-width: min(20rem, 100%);
   height: auto;
-  background-color: #f0f1f2;
+  background-color: #C0E3DC;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
