@@ -1,5 +1,6 @@
-@media (max-width: 48rem) {
+@media (max-width: 40rem) {
   .cert-slider {
-    --cert-offset: 9rem;
+    --cert-w: clamp(6.5rem, 24vw, 9rem);
+    --cert-gap: 0.75rem;
   }
 }
