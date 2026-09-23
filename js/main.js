@@ -73,14 +73,16 @@
       timer = setInterval(next, INTERVAL);
     }
 
-    function openLightbox(slide) {
-      const img = slide.querySelector("img");
+    let lightboxSource = null;
+
+    function openLightbox(img, caption) {
       stop();
-      lightboxImg.src = img.src;
+      lightboxImg.src = img.currentSrc || img.src;
       lightboxImg.alt = img.alt;
-      lightboxCaption.textContent = img.alt;
+      lightboxCaption.textContent = caption || img.alt;
       lightbox.hidden = false;
       document.body.classList.add("has-lightbox");
+      lightboxSource = img;
       lightboxClose.focus();
     }
 
@@ -88,7 +90,10 @@
       lightbox.hidden = true;
       document.body.classList.remove("has-lightbox");
       start();
-      slides[index].focus();
+      if (lightboxSource) {
+        lightboxSource.focus();
+        lightboxSource = null;
+      }
     }
 
     slides.forEach((slide) => {
@@ -101,7 +106,7 @@
         } else if (slide.classList.contains("is-next")) {
           next();
         } else if (slide.classList.contains("is-active")) {
-          openLightbox(slide);
+          openLightbox(slide.querySelector("img"));
         }
       });
       slide.addEventListener("keydown", (event) => {
@@ -130,6 +135,22 @@
     slider.addEventListener("focusout", start);
 
     reduceMotion.addEventListener("change", start);
+
+    const cvImg = document.querySelector(".cv-preview__img");
+    if (cvImg) {
+      cvImg.tabIndex = 0;
+      cvImg.setAttribute("role", "button");
+      cvImg.setAttribute("aria-label", "Ampliar la vista previa del curriculum vitae");
+      cvImg.addEventListener("click", () => {
+        openLightbox(cvImg, "Curriculum Vitae");
+      });
+      cvImg.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          cvImg.click();
+        }
+      });
+    }
 
     update();
     start();

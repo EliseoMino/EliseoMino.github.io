@@ -71,10 +71,16 @@
 .cv-preview__img {
   max-width: min(20rem, 100%);
   height: auto;
-  background-color: #C0E3DC;
+  background-color: #f0f1f2;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+  cursor: zoom-in;
+}
+
+.cv-preview__img:focus-visible {
+  outline: 2px solid var(--accent-soft);
+  outline-offset: 2px;
 }
 
 .cv-actions {
