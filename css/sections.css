@@ -37,19 +37,30 @@
 .site-nav ul {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-sm);
+  gap: var(--space-xs);
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .site-nav a {
+  display: inline-flex;
+  align-items: center;
   color: var(--text);
   text-decoration: none;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.45rem 0.9rem;
+  min-height: 44px;
+  line-height: 1.2;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 .site-nav a:hover {
-  color: var(--accent);
+  background-color: var(--border);
+  border-color: var(--accent);
+  color: var(--text);
 }
 
 .site-footer {
