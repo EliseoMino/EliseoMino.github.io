@@ -20,6 +20,7 @@
 
   const slider = document.getElementById("cert-slider");
   if (slider) {
+    slider.classList.add("is-js");
     const slides = Array.from(slider.querySelectorAll(".cert-slide"));
     const prevBtn = document.getElementById("cert-prev");
     const nextBtn = document.getElementById("cert-next");
@@ -33,7 +34,18 @@
 
     function update() {
       slides.forEach((slide, i) => {
-        slide.hidden = i !== index;
+        slide.classList.remove("is-active", "is-prev", "is-next");
+        slide.hidden = true;
+        if (i === index) {
+          slide.classList.add("is-active");
+          slide.hidden = false;
+        } else if (i === (index - 1 + slides.length) % slides.length) {
+          slide.classList.add("is-prev");
+          slide.hidden = false;
+        } else if (i === (index + 1) % slides.length) {
+          slide.classList.add("is-next");
+          slide.hidden = false;
+        }
       });
       counter.textContent = `${index + 1} / ${slides.length}`;
     }
@@ -61,15 +73,8 @@
       timer = setInterval(next, INTERVAL);
     }
 
-    prevBtn.addEventListener("click", () => {
-      prev();
-      stop();
-    });
-
-    nextBtn.addEventListener("click", () => {
-      next();
-      stop();
-    });
+    prevBtn.addEventListener("click", prev);
+    nextBtn.addEventListener("click", next);
 
     pauseBtn.addEventListener("click", () => {
       paused = !paused;

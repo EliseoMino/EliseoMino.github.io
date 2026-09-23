@@ -1,0 +1,5 @@
+@media (max-width: 48rem) {
+  .cert-slider {
+    --cert-offset: 9rem;
+  }
+}
