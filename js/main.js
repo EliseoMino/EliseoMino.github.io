@@ -22,14 +22,14 @@
   if (slider) {
     slider.classList.add("is-js");
     const slides = Array.from(slider.querySelectorAll(".cert-slide"));
-    const prevBtn = document.getElementById("cert-prev");
-    const nextBtn = document.getElementById("cert-next");
-    const pauseBtn = document.getElementById("cert-pause");
     const counter = document.getElementById("cert-counter");
+    const lightbox = document.getElementById("cert-lightbox");
+    const lightboxImg = document.getElementById("cert-lightbox-img");
+    const lightboxCaption = document.getElementById("cert-lightbox-caption");
+    const lightboxClose = document.getElementById("cert-lightbox-close");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const INTERVAL = 8000;
+    const INTERVAL = 5000;
     let index = 0;
-    let paused = false;
     let timer = null;
 
     function update() {
@@ -69,18 +69,59 @@
 
     function start() {
       stop();
-      if (paused || reduceMotion.matches || slides.length < 2) return;
+      if (reduceMotion.matches || slides.length < 2) return;
       timer = setInterval(next, INTERVAL);
     }
 
-    prevBtn.addEventListener("click", prev);
-    nextBtn.addEventListener("click", next);
+    function openLightbox(slide) {
+      const img = slide.querySelector("img");
+      stop();
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightboxCaption.textContent = img.alt;
+      lightbox.hidden = false;
+      document.body.classList.add("has-lightbox");
+      lightboxClose.focus();
+    }
 
-    pauseBtn.addEventListener("click", () => {
-      paused = !paused;
-      pauseBtn.setAttribute("aria-pressed", String(paused));
-      pauseBtn.textContent = paused ? "Reanudar" : "Pausar";
+    function closeLightbox() {
+      lightbox.hidden = true;
+      document.body.classList.remove("has-lightbox");
       start();
+      slides[index].focus();
+    }
+
+    slides.forEach((slide) => {
+      slide.tabIndex = 0;
+      slide.setAttribute("role", "button");
+      slide.setAttribute("aria-label", slide.querySelector("img").alt);
+      slide.addEventListener("click", () => {
+        if (slide.classList.contains("is-prev")) {
+          prev();
+        } else if (slide.classList.contains("is-next")) {
+          next();
+        } else if (slide.classList.contains("is-active")) {
+          openLightbox(slide);
+        }
+      });
+      slide.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          slide.click();
+        }
+      });
+    });
+
+    lightboxClose.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !lightbox.hidden) {
+        closeLightbox();
+      }
     });
 
     slider.addEventListener("mouseenter", stop);

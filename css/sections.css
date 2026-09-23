@@ -62,3 +62,22 @@
 .site-footer__contact {
   margin-bottom: var(--space-xs);
 }
+
+.cv-preview {
+  margin: 0;
+  text-align: center;
+}
+
+.cv-preview__img {
+  max-width: min(40rem, 100%);
+  height: auto;
+  background-color: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+}
+
+.cv-actions {
+  margin: var(--space-md) 0 0;
+  text-align: center;
+}

@@ -23,7 +23,7 @@
         <li><a href="#habilidades">Habilidades</a></li>
         <li><a href="#proyectos">Proyectos</a></li>
         <li><a href="#security-lab">Security Lab</a></li>
-        <li><a href="#experiencia">Experiencia</a></li>
+        <li><a href="#cv">Curriculum Vitae</a></li>
         <li><a href="#formacion">Formación</a></li>
       </ul>
     </nav>
@@ -87,7 +87,7 @@
       </ul>
       <h3 id="certificados-titulo">Certificados</h3>
       <div class="cert-slider" id="cert-slider" aria-label="Certificados de los Security Labs">
-        <ul class="cert-slider__track">
+        <ul class="cert-slider__track" tabindex="0" aria-label="Galería de certificados. Las imágenes laterales cambian el certificado visible.">
           <li class="cert-slide">
             <img src="assets/images/THM-101.webp" alt="Certificado TryHackMe — THM-101">
           </li>
@@ -104,19 +104,18 @@
             <img src="assets/images/THM-WDETHCFOJP.webp" alt="Certificado TryHackMe — THM-WDETHCFOJP">
           </li>
         </ul>
-        <div class="cert-slider__controls">
-          <button type="button" id="cert-prev" class="cert-slider__btn">Anterior</button>
-          <p class="cert-slider__counter" id="cert-counter" aria-live="polite">1 / 5</p>
-          <button type="button" id="cert-next" class="cert-slider__btn">Siguiente</button>
-          <button type="button" id="cert-pause" class="cert-slider__btn" aria-pressed="false">Pausar</button>
-        </div>
+        <p class="cert-slider__counter" id="cert-counter" aria-live="polite">1 / 5</p>
       </div>
-      <p>Estas prácticas son experiencias educativas en laboratorio y no constituyen experiencia profesional.</p>
     </section>
 
-    <section id="experiencia" class="section" aria-labelledby="experiencia-titulo">
-      <h2 id="experiencia-titulo">Experiencia</h2>
-      <p>Sin experiencia profesional para mostrar todavía. Se actualizará cuando exista información real.</p>
+    <section id="cv" class="section" aria-labelledby="cv-titulo">
+      <h2 id="cv-titulo">Curriculum Vitae</h2>
+      <figure class="cv-preview">
+        <img class="cv-preview__img" src="assets/images/CV.webp" alt="Vista previa del curriculum vitae de Eliseo Miño">
+      </figure>
+      <p class="cv-actions">
+        <a class="btn" href="assets/documents/CV.pdf" download>Descargar</a>
+      </p>
     </section>
 
     <section id="formacion" class="section" aria-labelledby="formacion-titulo">
@@ -134,6 +133,14 @@
     </p>
     <p>© 2026 Eliseo Miño · Licencia MIT · HTML, CSS y JavaScript vanilla</p>
   </footer>
+
+  <div class="lightbox" id="cert-lightbox" hidden role="dialog" aria-modal="true" aria-label="Vista ampliada del certificado">
+    <figure class="lightbox__figure">
+      <img id="cert-lightbox-img" src="" alt="">
+      <figcaption id="cert-lightbox-caption" class="lightbox__caption"></figcaption>
+    </figure>
+    <button type="button" id="cert-lightbox-close" class="lightbox__close">Cerrar</button>
+  </div>
 
   <script src="data/projects.js"></script>
   <script src="js/main.js"></script>
