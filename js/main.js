@@ -25,6 +25,7 @@
     const counter = document.getElementById("cert-counter");
     const lightbox = document.getElementById("cert-lightbox");
     const lightboxImg = document.getElementById("cert-lightbox-img");
+    const lightboxPdf = document.getElementById("cert-lightbox-pdf");
     const lightboxCaption = document.getElementById("cert-lightbox-caption");
     const lightboxClose = document.getElementById("cert-lightbox-close");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -77,6 +78,9 @@
 
     function openLightbox(img, caption) {
       stop();
+      lightboxPdf.data = "";
+      lightboxPdf.hidden = true;
+      lightboxImg.hidden = false;
       lightboxImg.src = img.currentSrc || img.src;
       lightboxImg.alt = img.alt;
       lightboxCaption.textContent = caption || img.alt;
@@ -86,9 +90,24 @@
       lightboxClose.focus();
     }
 
+    function openLightboxPdf(src, caption, sourceEl) {
+      stop();
+      lightboxImg.hidden = true;
+      lightboxPdf.hidden = false;
+      lightboxPdf.data = src;
+      lightboxCaption.textContent = caption;
+      lightbox.hidden = false;
+      document.body.classList.add("has-lightbox");
+      lightboxSource = sourceEl;
+      lightboxClose.focus();
+    }
+
     function closeLightbox() {
       lightbox.hidden = true;
       document.body.classList.remove("has-lightbox");
+      lightboxPdf.data = "";
+      lightboxPdf.hidden = true;
+      lightboxImg.hidden = false;
       start();
       if (lightboxSource) {
         lightboxSource.focus();
@@ -142,7 +161,7 @@
       cvImg.setAttribute("role", "button");
       cvImg.setAttribute("aria-label", "Ampliar la vista previa del curriculum vitae");
       cvImg.addEventListener("click", () => {
-        openLightbox(cvImg, "Curriculum Vitae");
+        openLightboxPdf("assets/documents/CV.pdf", "Curriculum Vitae (PDF)", cvImg);
       });
       cvImg.addEventListener("keydown", (event) => {
         if (event.key === "Enter" || event.key === " ") {

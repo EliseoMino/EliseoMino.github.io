@@ -188,6 +188,21 @@
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
 }
 
+.lightbox__figure img[hidden],
+.lightbox__pdf[hidden] {
+  display: none;
+}
+
+.lightbox__pdf {
+  display: block;
+  width: min(90vw, 60rem);
+  height: 85vh;
+  background-color: #f0f1f2;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
 .lightbox__caption {
   margin-top: var(--space-sm);
   color: var(--text);
