@@ -1,0 +1,22 @@
+.section {
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: var(--space-sm);
+  padding-block: var(--space-xl);
+}
+
+.section--hero {
+  padding-block-start: var(--space-xl);
+}
+
+.site-header {
+  background-color: rgba(6, 20, 40, 0.9);
+  border-bottom: 1px solid var(--border);
+}
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  padding-block: var(--space-md);
+  text-align: center;
+}
