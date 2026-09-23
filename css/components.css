@@ -29,3 +29,74 @@
   font-family: var(--font-mono);
   font-size: 0.9rem;
 }
+
+.cert-slider {
+  max-width: 32rem;
+}
+
+.cert-slider__track {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.cert-slide {
+  margin: 0;
+}
+
+.cert-slide[hidden] {
+  display: none;
+}
+
+.cert-slide object {
+  display: block;
+  width: 100%;
+  max-width: 30rem;
+  aspect-ratio: 297 / 210;
+  background-color: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.cert-slide figcaption {
+  margin-top: var(--space-xs);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.cert-slider__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+.cert-slider__btn {
+  background-color: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.5rem 1rem;
+  min-height: 44px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.cert-slider__btn:hover {
+  border-color: var(--accent);
+  color: var(--accent-soft);
+}
+
+.cert-slider__btn:focus-visible {
+  outline: 2px solid var(--accent-soft);
+  outline-offset: 2px;
+}
+
+.cert-slider__counter {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-mono);
+}

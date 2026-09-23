@@ -15,10 +15,9 @@
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
   <header class="site-header">
-    <p class="site-header__brand">Eliseo Miño</p>
+    <a class="site-header__brand" href="#hero">INICIO</a>
     <nav class="site-nav" aria-label="Navegación principal">
       <ul>
-        <li><a href="#hero">Inicio</a></li>
         <li><a href="#sobre-mi">Sobre mí</a></li>
         <li><a href="#mision">Misión</a></li>
         <li><a href="#habilidades">Habilidades</a></li>
@@ -26,8 +25,6 @@
         <li><a href="#security-lab">Security Lab</a></li>
         <li><a href="#experiencia">Experiencia</a></li>
         <li><a href="#formacion">Formación</a></li>
-        <li><a href="#github">GitHub</a></li>
-        <li><a href="#contacto">Contacto</a></li>
       </ul>
     </nav>
   </header>
@@ -88,6 +85,47 @@
         <li>Jr Penetration Tester — completado</li>
         <li>Cybersecurity 101 — completado</li>
       </ul>
+      <h3 id="certificados-titulo">Certificados</h3>
+      <div class="cert-slider" id="cert-slider" aria-label="Certificados de los Security Labs">
+        <div class="cert-slider__track">
+          <figure class="cert-slide">
+            <object data="assets/documents/THM-101.pdf" type="application/pdf">
+              <a href="assets/documents/THM-101.pdf">Abrir certificado THM-101 (PDF)</a>
+            </object>
+            <figcaption>TryHackMe — THM-101</figcaption>
+          </figure>
+          <figure class="cert-slide">
+            <object data="assets/documents/THM-RED1.pdf" type="application/pdf">
+              <a href="assets/documents/THM-RED1.pdf">Abrir certificado THM-RED1 (PDF)</a>
+            </object>
+            <figcaption>TryHackMe — THM-RED1</figcaption>
+          </figure>
+          <figure class="cert-slide">
+            <object data="assets/documents/THM-RED2.pdf" type="application/pdf">
+              <a href="assets/documents/THM-RED2.pdf">Abrir certificado THM-RED2 (PDF)</a>
+            </object>
+            <figcaption>TryHackMe — THM-RED2</figcaption>
+          </figure>
+          <figure class="cert-slide">
+            <object data="assets/documents/THM-SOC1.pdf" type="application/pdf">
+              <a href="assets/documents/THM-SOC1.pdf">Abrir certificado THM-SOC1 (PDF)</a>
+            </object>
+            <figcaption>TryHackMe — THM-SOC1</figcaption>
+          </figure>
+          <figure class="cert-slide">
+            <object data="assets/documents/THM-WDETHCFOJP.pdf" type="application/pdf">
+              <a href="assets/documents/THM-WDETHCFOJP.pdf">Abrir certificado THM-WDETHCFOJP (PDF)</a>
+            </object>
+            <figcaption>TryHackMe — THM-WDETHCFOJP</figcaption>
+          </figure>
+        </div>
+        <div class="cert-slider__controls">
+          <button type="button" id="cert-prev" class="cert-slider__btn">Anterior</button>
+          <p class="cert-slider__counter" id="cert-counter" aria-live="polite">1 / 5</p>
+          <button type="button" id="cert-next" class="cert-slider__btn">Siguiente</button>
+          <button type="button" id="cert-pause" class="cert-slider__btn" aria-pressed="false">Pausar</button>
+        </div>
+      </div>
       <p>Estas prácticas son experiencias educativas en laboratorio y no constituyen experiencia profesional.</p>
     </section>
 
@@ -102,20 +140,13 @@
         <li>Ingeniería en Sistemas — UTN FRVM (Universidad Tecnológica Nacional, Facultad Regional Villa María) · 2022 — actualidad</li>
       </ul>
     </section>
-
-    <section id="github" class="section" aria-labelledby="github-titulo">
-      <h2 id="github-titulo">GitHub</h2>
-      <p>Mi código y evidencias técnicas están disponibles en <a href="https://github.com/EliseoMino" rel="noopener noreferrer">github.com/EliseoMino</a>.</p>
-    </section>
-
-    <section id="contacto" class="section" aria-labelledby="contacto-titulo">
-      <h2 id="contacto-titulo">Contacto</h2>
-      <p>Email: <a href="mailto:eeliseo.mino@gmail.com">eeliseo.mino@gmail.com</a></p>
-      <p>GitHub: <a href="https://github.com/EliseoMino" rel="noopener noreferrer">github.com/EliseoMino</a></p>
-    </section>
   </main>
 
   <footer class="site-footer">
+    <p class="site-footer__contact">
+      Email: <a href="mailto:eeliseo.mino@gmail.com">eeliseo.mino@gmail.com</a> ·
+      GitHub: <a href="https://github.com/EliseoMino" rel="noopener noreferrer">github.com/EliseoMino</a>
+    </p>
     <p>© 2026 Eliseo Miño · Licencia MIT · HTML, CSS y JavaScript vanilla</p>
   </footer>
 
