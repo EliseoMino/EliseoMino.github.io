@@ -131,23 +131,30 @@
   display: inline-block;
   background-color: var(--accent);
   color: var(--abyss);
-  border: 1px solid transparent;
+  border: 1px solid var(--accent-soft);
   border-radius: var(--radius);
-  padding: 0.6rem 1.4rem;
-  min-height: 44px;
-  font: inherit;
-  font-weight: 600;
+  padding: 0.8rem 1.8rem;
+  min-height: 48px;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
   text-decoration: none;
+  box-shadow: 0 4px 16px rgba(61, 155, 255, 0.3);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
   cursor: pointer;
 }
 
 .btn:hover {
   background-color: var(--accent-soft);
+  color: var(--abyss);
+  box-shadow: 0 6px 20px rgba(61, 155, 255, 0.4);
 }
 
 .btn:focus-visible {
-  outline: 2px solid var(--accent-soft);
-  outline-offset: 2px;
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 5px rgba(61, 155, 255, 0.35);
 }
 
 .lightbox {
