@@ -60,13 +60,14 @@
 .project-card__image-link {
   display: block;
   overflow: hidden;
+  aspect-ratio: 16 / 9;
   background-color: var(--surface);
 }
 
 .project-card__image-link img {
   display: block;
   width: 100%;
-  aspect-ratio: 1;
+  height: 100%;
   object-fit: contain;
   background-color: #ffffff;
 }
@@ -78,6 +79,18 @@
 .project-detail__stack {
   color: var(--muted);
   font-family: var(--font-mono);
+}
+
+.honeypot-page h1 {
+  font-size: clamp(1.4rem, 3.5vw, 2.45rem);
+}
+
+.honeypot-page h2 {
+  font-size: clamp(1.05rem, 2.1vw, 1.4rem);
+}
+
+.project-gallery {
+  margin-block-start: var(--space-xl);
 }
 
 .cert-slider {

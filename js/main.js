@@ -53,11 +53,8 @@
     });
   }
 
-  const slider = document.getElementById("cert-slider");
-  if (slider) {
-    slider.classList.add("is-js");
-    const slides = Array.from(slider.querySelectorAll(".cert-slide"));
-    const counter = document.getElementById("cert-counter");
+  const sliders = Array.from(document.querySelectorAll(".cert-slider"));
+  if (sliders.length > 0) {
     const lightbox = document.getElementById("cert-lightbox");
     const lightboxImg = document.getElementById("cert-lightbox-img");
     const lightboxPdf = document.getElementById("cert-lightbox-pdf");
@@ -65,56 +62,25 @@
     const lightboxClose = document.getElementById("cert-lightbox-close");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const INTERVAL = 5000;
-    let index = 0;
-    let timer = null;
-
-    function update() {
-      slides.forEach((slide, i) => {
-        slide.classList.remove("is-active", "is-prev", "is-next");
-        slide.hidden = true;
-        if (i === index) {
-          slide.classList.add("is-active");
-          slide.hidden = false;
-        } else if (i === (index - 1 + slides.length) % slides.length) {
-          slide.classList.add("is-prev");
-          slide.hidden = false;
-        } else if (i === (index + 1) % slides.length) {
-          slide.classList.add("is-next");
-          slide.hidden = false;
-        }
-      });
-      counter.textContent = `${index + 1} / ${slides.length}`;
-    }
-
-    function next() {
-      index = (index + 1) % slides.length;
-      update();
-    }
-
-    function prev() {
-      index = (index - 1 + slides.length) % slides.length;
-      update();
-    }
-
-    function stop() {
-      if (timer) {
-        clearInterval(timer);
-        timer = null;
-      }
-    }
-
-    function start() {
-      stop();
-      if (reduceMotion.matches || slides.length < 2) return;
-      timer = setInterval(next, INTERVAL);
-    }
-
     let lightboxSource = null;
+    let resumeCarousels = () => {};
+    const carousels = [];
 
-    function openLightbox(img, caption) {
+    function stopCarousels() {
+      carousels.forEach((carousel) => carousel.stop());
+    }
+
+    function startCarousels() {
+      carousels.forEach((carousel) => carousel.start());
+    }
+
+    function openLightbox(img, caption, stop, start) {
       stop();
-      lightboxPdf.data = "";
-      lightboxPdf.hidden = true;
+      resumeCarousels = start;
+      if (lightboxPdf) {
+        lightboxPdf.data = "";
+        lightboxPdf.hidden = true;
+      }
       lightboxImg.hidden = false;
       lightboxImg.src = img.currentSrc || img.src;
       lightboxImg.alt = img.alt;
@@ -126,7 +92,8 @@
     }
 
     function openLightboxPdf(src, caption, sourceEl) {
-      stop();
+      stopCarousels();
+      resumeCarousels = startCarousels;
       lightboxImg.hidden = true;
       lightboxPdf.hidden = false;
       lightboxPdf.data = src;
@@ -140,35 +107,96 @@
     function closeLightbox() {
       lightbox.hidden = true;
       document.body.classList.remove("has-lightbox");
-      lightboxPdf.data = "";
-      lightboxPdf.hidden = true;
+      if (lightboxPdf) {
+        lightboxPdf.data = "";
+        lightboxPdf.hidden = true;
+      }
       lightboxImg.hidden = false;
-      start();
+      resumeCarousels();
       if (lightboxSource) {
         lightboxSource.focus();
         lightboxSource = null;
       }
     }
 
-    slides.forEach((slide) => {
-      slide.tabIndex = 0;
-      slide.setAttribute("role", "button");
-      slide.setAttribute("aria-label", slide.querySelector("img").alt);
-      slide.addEventListener("click", () => {
-        if (slide.classList.contains("is-prev")) {
-          prev();
-        } else if (slide.classList.contains("is-next")) {
-          next();
-        } else if (slide.classList.contains("is-active")) {
-          openLightbox(slide.querySelector("img"));
+    sliders.forEach((slider) => {
+      slider.classList.add("is-js");
+      const slides = Array.from(slider.querySelectorAll(".cert-slide"));
+      const counter = slider.querySelector(".cert-slider__counter");
+      let index = 0;
+      let timer = null;
+
+      function update() {
+        slides.forEach((slide, i) => {
+          slide.classList.remove("is-active", "is-prev", "is-next");
+          slide.hidden = true;
+          if (i === index) {
+            slide.classList.add("is-active");
+            slide.hidden = false;
+          } else if (i === (index - 1 + slides.length) % slides.length) {
+            slide.classList.add("is-prev");
+            slide.hidden = false;
+          } else if (i === (index + 1) % slides.length) {
+            slide.classList.add("is-next");
+            slide.hidden = false;
+          }
+        });
+        counter.textContent = `${index + 1} / ${slides.length}`;
+      }
+
+      function next() {
+        index = (index + 1) % slides.length;
+        update();
+      }
+
+      function prev() {
+        index = (index - 1 + slides.length) % slides.length;
+        update();
+      }
+
+      function stop() {
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
         }
+      }
+
+      function start() {
+        stop();
+        if (reduceMotion.matches || !lightbox.hidden || slides.length < 2) return;
+        timer = setInterval(next, INTERVAL);
+      }
+
+      slides.forEach((slide) => {
+        slide.tabIndex = 0;
+        slide.setAttribute("role", "button");
+        slide.setAttribute("aria-label", slide.querySelector("img").alt);
+        slide.addEventListener("click", () => {
+          if (slide.classList.contains("is-prev")) {
+            prev();
+          } else if (slide.classList.contains("is-next")) {
+            next();
+          } else if (slide.classList.contains("is-active")) {
+            openLightbox(slide.querySelector("img"), null, stop, start);
+          }
+        });
+        slide.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            slide.click();
+          }
+        });
       });
-      slide.addEventListener("keydown", (event) => {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          slide.click();
-        }
-      });
+
+      slider.addEventListener("mouseenter", stop);
+      slider.addEventListener("mouseleave", start);
+      slider.addEventListener("focusin", stop);
+      slider.addEventListener("focusout", start);
+      reduceMotion.addEventListener("change", start);
+
+      carousels.push({ stop, start });
+      update();
+      start();
     });
 
     lightboxClose.addEventListener("click", closeLightbox);
@@ -182,13 +210,6 @@
         closeLightbox();
       }
     });
-
-    slider.addEventListener("mouseenter", stop);
-    slider.addEventListener("mouseleave", start);
-    slider.addEventListener("focusin", stop);
-    slider.addEventListener("focusout", start);
-
-    reduceMotion.addEventListener("change", start);
 
     const cvImg = document.querySelector(".cv-preview__img");
     if (cvImg) {
@@ -205,8 +226,5 @@
         }
       });
     }
-
-    update();
-    start();
   }
 })();

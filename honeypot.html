@@ -15,11 +15,20 @@
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
   <header class="site-header">
-    <a class="site-header__brand" href="index.html#proyectos">Volver a proyectos</a>
+    <a class="site-header__brand" href="index.html#hero">INICIO</a>
+    <nav class="site-nav" aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html#hero">Perfil</a></li>
+        <li><a href="index.html#proyectos">Proyectos</a></li>
+        <li><a href="index.html#formacion">Formación y certificaciones</a></li>
+        <li><a href="index.html#cv">Curriculum Vitae</a></li>
+        <li><a href="index.html#habilidades">Habilidades</a></li>
+      </ul>
+    </nav>
   </header>
 
   <main id="contenido">
-    <article class="section" aria-labelledby="honeypot-titulo">
+    <article class="section honeypot-page" aria-labelledby="honeypot-titulo">
       <h1 id="honeypot-titulo">Honeypot Dashboard</h1>
       <p>Un honeypot es un sistema diseñado para atraer actividad potencialmente maliciosa y observar cómo interactúan los atacantes con él. Este proyecto utiliza Cowrie para simular un servicio SSH/Telnet, registrar intentos de acceso y comandos ejecutados, y procesar los eventos para visualizarlos en un dashboard privado.</p>
 
@@ -34,11 +43,53 @@
       <h2>Descripción técnica</h2>
       <p class="project-detail__stack"><strong>Stack:</strong> Cowrie · Python · FastAPI · PostgreSQL · React</p>
       <p>Ingestión de eventos, procesamiento y normalización, detección basada en reglas y visualización de actividad sospechosa en un panel privado.</p>
+
+      <section class="project-gallery" aria-labelledby="honeypot-panel-titulo">
+        <h2 id="honeypot-panel-titulo">Panel de control principal</h2>
+        <div class="cert-slider" id="honeypot-panel-slider" aria-label="Carrusel del panel de control principal">
+          <ul class="cert-slider__track" tabindex="0" aria-label="Galería del panel de control. Usa las imágenes laterales para cambiar la imagen visible.">
+            <li class="cert-slide"><img src="assets/images/honeypotdashboard1.png" alt="Panel de control principal, vista 1"></li>
+            <li class="cert-slide"><img src="assets/images/honeypotdashboard2.png" alt="Panel de control principal, vista 2"></li>
+            <li class="cert-slide"><img src="assets/images/honeypotdashboard3.png" alt="Panel de control principal, vista 3"></li>
+          </ul>
+          <p class="cert-slider__counter" aria-live="polite">1 / 3</p>
+        </div>
+      </section>
+
+      <section class="project-gallery" aria-labelledby="honeypot-vistas-titulo">
+        <h2 id="honeypot-vistas-titulo">Otras pestañas del dashboard</h2>
+        <div class="cert-slider" id="honeypot-vistas-slider" aria-label="Carrusel de otras pestañas del dashboard">
+          <ul class="cert-slider__track" tabindex="0" aria-label="Galería de otras pestañas. Usa las imágenes laterales para cambiar la imagen visible.">
+            <li class="cert-slide"><img src="assets/images/honeypotdashboard_alerta.png" alt="Pestaña de alertas"></li>
+            <li class="cert-slide"><img src="assets/images/honeypotdashboard_comandos.png" alt="Pestaña de comandos"></li>
+            <li class="cert-slide"><img src="assets/images/honeypotdashboard_eventos.png" alt="Pestaña de eventos"></li>
+            <li class="cert-slide"><img src="assets/images/honeypotdashboard_ingesta.png" alt="Pestaña de ingesta de eventos"></li>
+            <li class="cert-slide"><img src="assets/images/honeypotdashboard_ips.png" alt="Pestaña de direcciones IP"></li>
+            <li class="cert-slide"><img src="assets/images/honeypotdashboard_reglas.png" alt="Pestaña de reglas"></li>
+            <li class="cert-slide"><img src="assets/images/honeypotdashboard_sesiones.png" alt="Pestaña de sesiones"></li>
+          </ul>
+          <p class="cert-slider__counter" aria-live="polite">1 / 7</p>
+        </div>
+      </section>
     </article>
   </main>
 
+  <div class="lightbox" id="cert-lightbox" hidden role="dialog" aria-modal="true" aria-label="Vista ampliada de imagen">
+    <figure class="lightbox__figure">
+      <img id="cert-lightbox-img" src="" alt="">
+      <figcaption id="cert-lightbox-caption" class="lightbox__caption"></figcaption>
+    </figure>
+    <button type="button" id="cert-lightbox-close" class="lightbox__close">Cerrar</button>
+  </div>
+
   <footer class="site-footer">
-    <p>Eliseo Miño</p>
+    <p class="site-footer__contact">
+      Email: <a href="mailto:eeliseo.mino@gmail.com">eeliseo.mino@gmail.com</a> ·
+      Teléfono: <a href="tel:+5493534232323">+54 9 353 423-2323</a> ·
+      GitHub: <a href="https://github.com/EliseoMino" rel="noopener noreferrer">github.com/EliseoMino</a>
+    </p>
+    <p>© 2026 Eliseo Miño · Licencia MIT · HTML, CSS y JavaScript vanilla</p>
   </footer>
+  <script src="js/main.js"></script>
 </body>
 </html>
