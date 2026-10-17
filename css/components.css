@@ -32,11 +32,12 @@
 
 .project-card-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-md);
 }
 
 .project-card {
+  width: 100%;
   overflow: hidden;
   background-color: var(--deep);
   border: 1px solid var(--border);
@@ -121,7 +122,7 @@
   display: block;
   width: 100%;
   height: auto;
-  background-color: #ffffff;
+  background-color: transparent;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
@@ -245,7 +246,7 @@
   width: auto;
   max-width: 92vw;
   max-height: 82vh;
-  background-color: #ffffff;
+  background-color: transparent;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
@@ -264,6 +265,46 @@
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+.lightbox__nav {
+  position: absolute;
+  top: 50%;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  transform: translateY(-50%);
+  background-color: rgba(10, 30, 56, 0.82);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  font: inherit;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.lightbox__nav--prev {
+  left: var(--space-sm);
+}
+
+.lightbox__nav--next {
+  right: var(--space-sm);
+}
+
+.lightbox__nav:hover {
+  border-color: var(--accent);
+  color: var(--accent-soft);
+}
+
+.lightbox__nav:focus-visible {
+  outline: 2px solid var(--accent-soft);
+  outline-offset: 3px;
+}
+
+.lightbox__nav[hidden] {
+  display: none;
 }
 
 .lightbox__caption {

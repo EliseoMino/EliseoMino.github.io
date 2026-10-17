@@ -126,8 +126,10 @@
         <p><a href="assets/documents/CV.pdf" target="_blank" rel="noopener noreferrer">Tu navegador no permite previsualizar el PDF aquí. Abrirlo en una pestaña.</a></p>
       </object>
       <a class="btn lightbox__open-pdf" id="cert-lightbox-open-pdf" href="assets/documents/CV.pdf" target="_blank" rel="noopener noreferrer" hidden>Abrir el PDF</a>
-      <figcaption id="cert-lightbox-caption" class="lightbox__caption"></figcaption>
+      <figcaption id="cert-lightbox-caption" class="lightbox__caption" aria-live="polite"></figcaption>
     </figure>
+    <button type="button" class="lightbox__nav lightbox__nav--prev" id="cert-lightbox-prev" aria-label="Imagen anterior" hidden>‹</button>
+    <button type="button" class="lightbox__nav lightbox__nav--next" id="cert-lightbox-next" aria-label="Imagen siguiente" hidden>›</button>
     <button type="button" id="cert-lightbox-close" class="lightbox__close">Cerrar</button>
   </div>
 

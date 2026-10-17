@@ -60,10 +60,15 @@
     const lightboxPdf = document.getElementById("cert-lightbox-pdf");
     const lightboxCaption = document.getElementById("cert-lightbox-caption");
     const lightboxClose = document.getElementById("cert-lightbox-close");
+    const lightboxPrev = document.getElementById("cert-lightbox-prev");
+    const lightboxNext = document.getElementById("cert-lightbox-next");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const INTERVAL = 5000;
     let lightboxSource = null;
     let resumeCarousels = () => {};
+    let lightboxSlides = [];
+    let lightboxIndex = 0;
+    let updateCarouselFromLightbox = () => {};
     const carousels = [];
 
     function stopCarousels() {
@@ -74,17 +79,37 @@
       carousels.forEach((carousel) => carousel.start());
     }
 
-    function openLightbox(img, caption, stop, start) {
+    function updateLightboxImage() {
+      const image = lightboxSlides[lightboxIndex].querySelector("img");
+      lightboxImg.src = image.currentSrc || image.src;
+      lightboxImg.alt = image.alt;
+      lightboxCaption.textContent = image.alt;
+      lightboxSource = image;
+    }
+
+    function moveLightboxImage(direction) {
+      if (lightboxSlides.length < 2) return;
+      lightboxIndex = (lightboxIndex + direction + lightboxSlides.length) % lightboxSlides.length;
+      updateLightboxImage();
+      updateCarouselFromLightbox(lightboxIndex);
+    }
+
+    function openLightbox(img, stop, start, slides, updateCarousel) {
       stop();
       resumeCarousels = start;
+      updateCarouselFromLightbox = updateCarousel;
       if (lightboxPdf) {
         lightboxPdf.data = "";
         lightboxPdf.hidden = true;
       }
+      lightboxSlides = slides;
+      lightboxIndex = slides.findIndex((slide) => slide.querySelector("img") === img);
+      if (lightboxIndex < 0) lightboxIndex = 0;
       lightboxImg.hidden = false;
-      lightboxImg.src = img.currentSrc || img.src;
-      lightboxImg.alt = img.alt;
-      lightboxCaption.textContent = caption || img.alt;
+      updateLightboxImage();
+      lightboxPrev.hidden = slides.length < 2;
+      lightboxNext.hidden = slides.length < 2;
+      updateCarouselFromLightbox(lightboxIndex);
       lightbox.hidden = false;
       document.body.classList.add("has-lightbox");
       lightboxSource = img;
@@ -98,6 +123,10 @@
       lightboxPdf.hidden = false;
       lightboxPdf.data = src;
       lightboxCaption.textContent = caption;
+      lightboxSlides = [];
+      updateCarouselFromLightbox = () => {};
+      lightboxPrev.hidden = true;
+      lightboxNext.hidden = true;
       lightbox.hidden = false;
       document.body.classList.add("has-lightbox");
       lightboxSource = sourceEl;
@@ -112,6 +141,10 @@
         lightboxPdf.hidden = true;
       }
       lightboxImg.hidden = false;
+      lightboxSlides = [];
+      updateCarouselFromLightbox = () => {};
+      lightboxPrev.hidden = true;
+      lightboxNext.hidden = true;
       resumeCarousels();
       if (lightboxSource) {
         lightboxSource.focus();
@@ -177,7 +210,10 @@
           } else if (slide.classList.contains("is-next")) {
             next();
           } else if (slide.classList.contains("is-active")) {
-            openLightbox(slide.querySelector("img"), null, stop, start);
+            openLightbox(slide.querySelector("img"), stop, start, slides, (nextIndex) => {
+              index = nextIndex;
+              update();
+            });
           }
         });
         slide.addEventListener("keydown", (event) => {
@@ -200,6 +236,8 @@
     });
 
     lightboxClose.addEventListener("click", closeLightbox);
+    lightboxPrev.addEventListener("click", () => moveLightboxImage(-1));
+    lightboxNext.addEventListener("click", () => moveLightboxImage(1));
     lightbox.addEventListener("click", (event) => {
       if (event.target === lightbox) {
         closeLightbox();
@@ -208,6 +246,10 @@
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && !lightbox.hidden) {
         closeLightbox();
+      } else if (!lightbox.hidden && event.key === "ArrowLeft") {
+        moveLightboxImage(-1);
+      } else if (!lightbox.hidden && event.key === "ArrowRight") {
+        moveLightboxImage(1);
       }
     });
 

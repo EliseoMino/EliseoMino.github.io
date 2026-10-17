@@ -1,4 +1,14 @@
+@media (max-width: 55rem) {
+  .project-card-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 40rem) {
+  .project-card-list {
+    grid-template-columns: 1fr;
+  }
+
   .cert-slider {
     --cert-w: clamp(8.5rem, 31vw, 11.5rem);
     --cert-gap: 1rem;

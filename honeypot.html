@@ -40,10 +40,6 @@
         <li><strong>Análisis defensivo:</strong> qué evidencias recopilar y qué medidas de seguridad considerar para reducir la exposición de un servidor.</li>
       </ul>
 
-      <h2>Descripción técnica</h2>
-      <p class="project-detail__stack"><strong>Stack:</strong> Cowrie · Python · FastAPI · PostgreSQL · React</p>
-      <p>Ingestión de eventos, procesamiento y normalización, detección basada en reglas y visualización de actividad sospechosa en un panel privado.</p>
-
       <section class="project-gallery" aria-labelledby="honeypot-panel-titulo">
         <h2 id="honeypot-panel-titulo">Panel de control principal</h2>
         <div class="cert-slider" id="honeypot-panel-slider" aria-label="Carrusel del panel de control principal">
@@ -71,14 +67,20 @@
           <p class="cert-slider__counter" aria-live="polite">1 / 7</p>
         </div>
       </section>
+
+      <h2>Descripción técnica</h2>
+      <p class="project-detail__stack"><strong>Stack:</strong> Cowrie · Python · FastAPI · PostgreSQL · React</p>
+      <p>Ingestión de eventos, procesamiento y normalización, detección basada en reglas y visualización de actividad sospechosa en un panel privado.</p>
     </article>
   </main>
 
   <div class="lightbox" id="cert-lightbox" hidden role="dialog" aria-modal="true" aria-label="Vista ampliada de imagen">
     <figure class="lightbox__figure">
       <img id="cert-lightbox-img" src="" alt="">
-      <figcaption id="cert-lightbox-caption" class="lightbox__caption"></figcaption>
+      <figcaption id="cert-lightbox-caption" class="lightbox__caption" aria-live="polite"></figcaption>
     </figure>
+    <button type="button" class="lightbox__nav lightbox__nav--prev" id="cert-lightbox-prev" aria-label="Imagen anterior" hidden>‹</button>
+    <button type="button" class="lightbox__nav lightbox__nav--next" id="cert-lightbox-next" aria-label="Imagen siguiente" hidden>›</button>
     <button type="button" id="cert-lightbox-close" class="lightbox__close">Cerrar</button>
   </div>
 
