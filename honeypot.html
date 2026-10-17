@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Honeypot Dashboard: observación y análisis de actividad en un servicio SSH/Telnet simulado con Cowrie.">
+  <meta name="author" content="Eliseo Miño">
+  <title>Honeypot Dashboard — Eliseo Miño</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <header class="site-header">
+    <a class="site-header__brand" href="index.html#proyectos">Volver a proyectos</a>
+  </header>
+
+  <main id="contenido">
+    <article class="section" aria-labelledby="honeypot-titulo">
+      <h1 id="honeypot-titulo">Honeypot Dashboard</h1>
+      <p>Un honeypot es un sistema diseñado para atraer actividad potencialmente maliciosa y observar cómo interactúan los atacantes con él. Este proyecto utiliza Cowrie para simular un servicio SSH/Telnet, registrar intentos de acceso y comandos ejecutados, y procesar los eventos para visualizarlos en un dashboard privado.</p>
+
+      <h2>¿Qué permite observar?</h2>
+      <ul>
+        <li><strong>Actividad de ataque:</strong> intentos de autenticación, credenciales utilizadas, comandos y comportamiento de las conexiones.</li>
+        <li><strong>Detección de amenazas:</strong> patrones sospechosos que ayudan a identificar actividad automatizada y posibles técnicas de intrusión.</li>
+        <li><strong>Superficie de ataque:</strong> cómo los servicios expuestos a Internet pueden ser descubiertos y explorados.</li>
+        <li><strong>Análisis defensivo:</strong> qué evidencias recopilar y qué medidas de seguridad considerar para reducir la exposición de un servidor.</li>
+      </ul>
+
+      <h2>Descripción técnica</h2>
+      <p class="project-detail__stack"><strong>Stack:</strong> Cowrie · Python · FastAPI · PostgreSQL · React</p>
+      <p>Ingestión de eventos, procesamiento y normalización, detección basada en reglas y visualización de actividad sospechosa en un panel privado.</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>Eliseo Miño</p>
+  </footer>
+</body>
+</html>

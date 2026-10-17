@@ -30,6 +30,56 @@
   font-size: 0.9rem;
 }
 
+.project-card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: var(--space-md);
+}
+
+.project-card {
+  overflow: hidden;
+  background-color: var(--deep);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.project-card > h3,
+.project-card > p,
+.project-card > .tags {
+  margin-inline: var(--space-sm);
+}
+
+.project-card > h3 {
+  margin-block: var(--space-sm) var(--space-xs);
+}
+
+.project-card > p {
+  color: var(--muted);
+}
+
+.project-card__image-link {
+  display: block;
+  overflow: hidden;
+  background-color: var(--surface);
+}
+
+.project-card__image-link img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  background-color: #ffffff;
+}
+
+.project-card__image-link:focus-visible {
+  outline-offset: -3px;
+}
+
+.project-detail__stack {
+  color: var(--muted);
+  font-family: var(--font-mono);
+}
+
 .cert-slider {
   --cert-w: clamp(13rem, 32vw, 20.5rem);
   --cert-gap: clamp(1rem, 3vw, 2rem);

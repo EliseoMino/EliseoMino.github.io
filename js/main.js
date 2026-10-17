@@ -6,14 +6,49 @@
     window.projects.forEach((proyecto) => {
       const item = document.createElement("article");
       item.className = "project-card";
-      const enlaces = proyecto.links || {};
-      const repo = enlaces.repo ? `<a href="${enlaces.repo}" rel="noopener noreferrer">Repositorio</a>` : "";
-      const demo = enlaces.demo ? `<a href="${enlaces.demo}" rel="noopener noreferrer">Demo</a>` : "";
-      item.innerHTML = `
-        <h3>${proyecto.title}</h3>
-        <p>${proyecto.description}</p>
-        <ul class="tags">${(proyecto.stack || []).map((t) => `<li>${t}</li>`).join("")}</ul>
-        <p>${repo} ${demo}</p>`;
+      if (proyecto.image && proyecto.detail) {
+        const imageLink = document.createElement("a");
+        imageLink.className = "project-card__image-link";
+        imageLink.href = proyecto.detail;
+        imageLink.target = "_blank";
+        imageLink.rel = "noopener noreferrer";
+        imageLink.setAttribute("aria-label", `Ver ${proyecto.title} en una pestaña nueva`);
+
+        const image = document.createElement("img");
+        image.src = proyecto.image;
+        image.alt = proyecto.imageAlt || proyecto.title;
+        image.loading = "lazy";
+        imageLink.appendChild(image);
+        item.appendChild(imageLink);
+      }
+
+      const title = document.createElement("h3");
+      if (proyecto.detail) {
+        const titleLink = document.createElement("a");
+        titleLink.href = proyecto.detail;
+        titleLink.target = "_blank";
+        titleLink.rel = "noopener noreferrer";
+        titleLink.textContent = proyecto.title;
+        title.appendChild(titleLink);
+      } else {
+        title.textContent = proyecto.title;
+      }
+      item.appendChild(title);
+
+      const description = document.createElement("p");
+      description.textContent = proyecto.description;
+      item.appendChild(description);
+
+      if (proyecto.stack && proyecto.stack.length) {
+        const stack = document.createElement("ul");
+        stack.className = "tags";
+        proyecto.stack.forEach((technology) => {
+          const tag = document.createElement("li");
+          tag.textContent = technology;
+          stack.appendChild(tag);
+        });
+        item.appendChild(stack);
+      }
       proyectos.appendChild(item);
     });
   }
